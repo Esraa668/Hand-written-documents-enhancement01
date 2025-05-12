@@ -27,6 +27,24 @@ def enhance_document(image_path, output_dir="output"):
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2, 2))
     final = cv2.morphologyEx(enhanced, cv2.MORPH_CLOSE, kernel, iterations=1)
 
+
+    filename = os.path.splitext(os.path.basename(image_path))[0] #Extracts the name of the file without its extension.
+    cv2.imwrite(f"{output_dir}/{filename}_enhanced.png", final) #automatically name the output filename based on the input
+
+    #Display original and enhanced together for comparison
+    plt.figure(figsize=(12, 6))
+    plt.subplot(1, 2, 1), plt.imshow(original, cmap='gray'), plt.title("Original")
+    plt.subplot(1, 2, 2), plt.imshow(final, cmap='gray'), plt.title("Enhanced")
+    plt.tight_layout()
+    plt.show()
+
+    return original, final
+
+if _name_ == "_main_":
+    img_path = "C:/Users/DELL/Downloads/PythonProject/doccc.png"
+    enhance_document(img_path)
+    
+
     
     filename = os.path.splitext(os.path.basename(image_path))[0] #Extracts the name of the file without its extension.
     cv2.imwrite(f"{output_dir}/{filename}_enhanced.png", final) #automatically name the output filename based on the input
