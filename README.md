@@ -1,7 +1,9 @@
 # Hand-written-documents-enhancement01
 
 
-![lkhuig](py01.jpg)
+| Before | After |
+|--------|-------|
+| ![Before](py01.jpg) | ![After](py02.jpg) |
 
 # Enhancement of Hand-written Documents using Image Processing
 
