@@ -23,3 +23,10 @@ def enhance_document(image_path, output_dir="output"):
     stretched = np.clip(sharpened, low, high)
     enhanced = cv2.normalize(stretched, None, 0, 255, cv2.NORM_MINMAX)
 
+   #morphological closing to reconnect broken strokes
+    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2, 2))
+    final = cv2.morphologyEx(enhanced, cv2.MORPH_CLOSE, kernel, iterations=1)
+
+    
+    filename = os.path.splitext(os.path.basename(image_path))[0] #Extracts the name of the file without its extension.
+    cv2.imwrite(f"{output_dir}/{filename}_enhanced.png", final) #automatically name the output filename based on the input
