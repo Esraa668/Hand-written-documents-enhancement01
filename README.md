@@ -1,90 +1,64 @@
-# Hand-written-documents-enhancement01
+Enhancement of Hand-written Documents using Image Processing
 
+Project Overview
+
+This project focuses on enhancing the readability and quality of scanned or captured hand-written documents. The objective is to apply a series of image processing techniques to reduce noise, correct uneven illumination, and enhance contrast while preserving the original content integrity.
+
+ Key Features:
+
+Noise Removal: Eliminates stains, shadows, and folds without affecting important strokes.
+
+Contrast Enhancement: Applies percentile clipping to adaptively stretch contrast without block artifacts.
+
+Stroke Repair: Reconnects broken strokes using morphological closing to enhance OCR compatibility.
+
+Implementation Details:
+
+Sharpening:
+
+Laplacian edge enhancement (cv2.Laplacian + blending) to emphasize important strokes while suppressing noise.
+
+Contrast Stretching:
+
+Percentile clipping (np.percentile + np.clip) as an alternative to CLAHE for smoother contrast adjustment.
+
+Stroke Repair:
+
+Morphological closing (cv2.morphologyEx) to reconnect broken strokes without binarization.
+
+ Dependencies:
+
+Python 3.8+
+
+OpenCV
+
+NumPy
+
+Matplotlib
+
+PIL
+
+FPDF
+
+Install the required libraries using:
+
+pip install opencv-python-headless numpy matplotlib pillow fpdf
+
+ How to Run:
+
+Clone the repository:
+
+git clone https://github.com/your_username/handwritten-enhancement.git
+cd handwritten-enhancement
+
+Run the main script:
+
+python enhance_document.py
+
+Check the output folder for the enhanced images.
+
+Results:
 
 | Before | After |
 |--------|-------|
-| ![Before](py01.jpg) | ![After](py02.jpg) |
-
-# Enhancement of Hand-written Documents using Image Processing
-
-## Objective:
-The goal of this project is to enhance the readability and quality of scanned or captured handwritten documents by applying the following techniques:
-- Noise removal (stains, shadows, folds)
-- Correction of uneven illumination
-- Contrast enhancement for better OCR compatibility
-- Preserving original content integrity
-
-## Key Algorithms Implemented:
-1. **Sharpening:**
-   - Laplacian edge enhancement (`cv2.Laplacian` + blending)
-   - This sharpens the strokes and reduces blurriness caused by scanning or camera focus, while suppressing mid-frequency noise.
-
-2. **Contrast Stretching:**
-   - Percentile clipping (`np.percentile` + `np.clip`)
-   - This technique adaptively stretches the contrast, overcoming problems caused by uneven lighting and shadows, without the block artifacts typical of CLAHE.
-
-3. **Stroke Repair:**
-   - Morphological closing (`cv2.morphologyEx`)
-   - This method works directly on the grayscale image to reconnect broken or faint strokes, especially in pencil or aged ink documents, without introducing binarization artifacts.
-
-## Why These Methods?
-1. **Laplacian Sharpening:**
-   - **Problem:** Handwritten documents are often blurry due to scanning or camera focus.
-   - **Solution:** The Laplacian method highlights stroke boundaries, making faint ink more visible without blurring edges.
-   
-2. **Percentile-based Contrast Stretching:**
-   - **Problem:** Uneven lighting (e.g., shadows or page curvature) leads to low contrast.
-   - **Solution:** Percentile clipping adapts to the document's lighting without being affected by outliers like dust or smudges. Unlike CLAHE, it avoids block artifacts.
-
-3. **Morphological Closing (Stroke Repair):**
-   - **Problem:** Broken or faint strokes are common in handwritten or aged documents.
-   - **Solution:** This method reconnects strokes without introducing artifacts, making the document more legible.
-
-## Trade-offs and Limitations:
-
-| Technique         | Pros                                              | Cons                                                 |
-|-------------------|---------------------------------------------------|------------------------------------------------------|
-| **Sharpening**    | Recovers blurred strokes                         | Amplifies high-frequency noise                       |
-| **Contrast Stretch** | Handles uneven lighting robustly              | Less effective for very low-contrast text            |
-| **Closing**       | Reconnects broken strokes                        | May thicken strokes excessively if not fine-tuned    |
-
-## Requirements:
-- Python 3.x
-- OpenCV (`cv2`)
-- NumPy
-- Matplotlib
-
-## How to Use:
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/username/enhancement-handwritten-documents.git
-   cd enhancement-handwritten-documents
-   ```
-
-2. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. Run the enhancement script:
-   ```bash
-   python enhance_document.py
-   ```
-
-4. The enhanced image will be saved in the `output` directory.
-
-## Example:
-
-```python
-img_path = "path_to_your_image.png"
-enhance_document(img_path)
-```
-
-This will read the input image, process it, and save the enhanced result in the `output` directory.
-
-## Contributing:
-If you'd like to contribute to this project, feel free to open a pull request or raise an issue.
-
-## License:
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+| ![Before](py02.jpg) | ![After](py03.jpg) |
